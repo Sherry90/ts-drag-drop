@@ -30,16 +30,13 @@ const validate = (validatableInput: Validatable) => {
 
 // autobind decorator
 const autobind = (_: any, _2: string, descriptor: PropertyDescriptor) => {
-  const originalMethod = descriptor.value;
-  const adjDescriptor: PropertyDescriptor = {
+  return {
     configurable: true,
     get() {
-      const boundFn = originalMethod.bind(this);
-      return boundFn;
+      return descriptor.value.bind(this);
     }
-  };
-  return adjDescriptor;
-}
+  } as PropertyDescriptor;
+};
 
 // ProjectInput Class
 class ProjectInput {
