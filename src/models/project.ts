@@ -1,4 +1,3 @@
-// Project Type
 export enum ProjectStatus {
   Active,
   Finished
@@ -11,6 +10,5 @@ export class Project {
     public description: string,
     public people: number,
     public status: ProjectStatus
-  ) {
-  }
+  ) {}
 }

@@ -1,7 +1,7 @@
-import { Project, ProjectStatus } from "../models/project";
+import { Project, ProjectStatus } from '../models/project';
 
-// Project Stata Management
-type Listener<T> = (item: T[]) => void;
+// Project State Management
+type Listener<T> = (items: T[]) => void;
 
 class State<T> {
   protected listeners: Listener<T>[] = [];
@@ -28,7 +28,13 @@ export class ProjectState extends State<Project> {
   }
 
   addProject(title: string, description: string, numOfPeople: number) {
-    const newProject = new Project(Math.random().toString(), title, description, numOfPeople, ProjectStatus.Active);
+    const newProject = new Project(
+      Math.random().toString(),
+      title,
+      description,
+      numOfPeople,
+      ProjectStatus.Active
+    );
     this.projects.push(newProject);
     this.updateListeners();
   }
@@ -42,8 +48,9 @@ export class ProjectState extends State<Project> {
   }
 
   private updateListeners() {
-    this.listeners.map(listenerFn => listenerFn(this.projects.slice()));
-
+    for (const listenerFn of this.listeners) {
+      listenerFn(this.projects.slice());
+    }
   }
 }
 

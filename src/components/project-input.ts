@@ -1,20 +1,25 @@
-import Component from "./base-component";
-import * as Validation from "../util/validation";
-import { autobind as Autobind } from "../decorators/autobind"
-import { projectState } from "../state/project-state";
+import Cmp from './base-component';
+import * as Validation from '../util/validation';
+import { autobind as Autobind } from '../decorators/autobind';
+import { projectState } from '../state/project-state';
 
 // ProjectInput Class
-export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
+export class ProjectInput extends Cmp<HTMLDivElement, HTMLFormElement> {
   titleInputElement: HTMLInputElement;
   descriptionInputElement: HTMLInputElement;
   peopleInputElement: HTMLInputElement;
 
   constructor() {
     super('project-input', 'app', true, 'user-input');
-    this.titleInputElement = this.element.querySelector('#title') as HTMLInputElement;
-    this.descriptionInputElement = this.element.querySelector('#description') as HTMLInputElement;
-    this.peopleInputElement = this.element.querySelector('#people') as HTMLInputElement;
-
+    this.titleInputElement = this.element.querySelector(
+      '#title'
+    ) as HTMLInputElement;
+    this.descriptionInputElement = this.element.querySelector(
+      '#description'
+    ) as HTMLInputElement;
+    this.peopleInputElement = this.element.querySelector(
+      '#people'
+    ) as HTMLInputElement;
     this.configure();
   }
 
@@ -22,8 +27,7 @@ export class ProjectInput extends Component<HTMLDivElement, HTMLFormElement> {
     this.element.addEventListener('submit', this.submitHandler);
   }
 
-  renderContent() {
-  }
+  renderContent() {}
 
   private gatherUserInput(): [string, string, number] | void {
     const enteredTitle = this.titleInputElement.value;
